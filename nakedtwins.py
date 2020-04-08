@@ -214,12 +214,10 @@ units = extract_units(unitlist, boxes)
 peers = extract_peers(units, boxes)
 
 def naked_twins(values):
-    stallled = False  
-
+   
     if(values is None):
         return False
     values_out = deepcopy(values)
-    solved_values_before = len([box for box in values_out.keys() if len(values_out[box]) == 1])       
     
     for key1 in values:
         if(len(values[key1])==2):
@@ -230,15 +228,7 @@ def naked_twins(values):
                             if(peer_key!=key_box and peer_key!=key1):
                                 values_out[peer_key] = values_out[peer_key].replace(''+(values[key1])[0],'')
                                 values_out[peer_key] = values_out[peer_key].replace(''+(values[key1])[1],'')
-                                
-    solved_values_after = len([box for box in values_out.keys() if len(values_out[box]) == 1])
-    # If no new values were added, stop the loop.
-    stalled = solved_values_before == solved_values_after
-
-    if(stalled):
-        return values_out
-    else:
-        values_out = naked_twins(values_out)
+   return values_out
 
 def eliminate(values):    
     for x in values: 
